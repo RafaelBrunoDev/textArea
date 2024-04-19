@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <textarea id="conteudo" rows="10" cols="30"></textarea>
+    <br>
+    <button onclick="baixarArquivo()">Baixar</button>
+
+    <script src="script.js"></script>
+
+    <script>
+        function baixarArquivo() {
+            var conteudo = document.getElementById('conteudo').value;
+
+            var blob = new Blob([conteudo], { type: 'text/plain' });
+            var url = window.URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'conteudo.txt';
+
+            document.body.appendChild(a);
+            a.click();
+
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+    </script>
+</main>
